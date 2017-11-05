@@ -1,20 +1,37 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Car = mongoose.model('Cars');
+const mongoose = require('mongoose');
+const Car = mongoose.model('Cars');
 
-exports.list_all = function (req, res) {
-    Car.find({}, function (err, car) {
-        if (err)
+// Create or POST
+exports.createItem = (req, res) => {
+    const car = new Car(req.body);
+
+    console.log('request', req.body);
+
+    car.save((err, car) => {
+        console.log(car);
+        if (err) {
             res.send(err);
+        } 
+
         res.json(car);
     });
 };
 
-exports.createItem = function (req, res) {
-    var car = new Car(req.body);
+// Read or GET
+exports.readAllItems = (req, res) => {
+    Car.find({}, (err, car) => {
+        if (err) {
+            res.send(err);
+        }
 
-    car.save(function (err, car) {
+        res.json(car);
+    });
+};
+ 
+exports.readItem = (req, res) => {
+    Car.findById(req.params.id, (err, car) => {
         if (err) {
             res.send(err);
         }
@@ -23,17 +40,10 @@ exports.createItem = function (req, res) {
     });
 };
 
-exports.readAPI = function (req, res) {
-    Car.findById(req.params.id, function (err, car) {
-        if (err) {
-            res.send(err);
-        }
-        res.json(car);
-    });
-};
-
-exports.updateAPI = function (req, res) {
-    Car.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, car) {
+// Update or PUT
+exports.updateItem = (req, res) => {
+    console.log('PUT', Number.isInteger(req.body.topSpeed));
+    Car.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, (err, car) => {
         if (err) {
             res.send(err);
         }
@@ -42,10 +52,11 @@ exports.updateAPI = function (req, res) {
     });
 };
 
-exports.deleteAPI = function (req, res) {
+// Delete
+exports.deleteItem = (req, res) => {
     Car.remove({
         _id: req.params.id
-    }, function (err, car) {
+    }, (err, car) => {
         if (err) {
             res.send(err);
         }

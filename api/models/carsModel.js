@@ -1,9 +1,9 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var carSchema = new Schema({
+const carSchema = new Schema({
     manufacturer: {
         type: String,
         required: 'Enter manufacturer name'

@@ -1,15 +1,15 @@
 'use strict';
 
-module.exports = function (app) {
-    var controller = require('../controllers/carsController');
+module.exports = (app) => {
+    const controller = require('../controllers/carsController');
 
     // set up routes
     app.route('/cars')
-        .get(controller.list_all)
+        .get(controller.readAllItems)
         .post(controller.createItem);
 
     app.route('/cars/:id')
-        .get(controller.readAPI)
-        .put(controller.updateAPI)
-        .delete(controller.deleteAPI);
+        .get(controller.readItem)
+        .put(controller.updateItem)
+        .delete(controller.deleteItem);
 };
