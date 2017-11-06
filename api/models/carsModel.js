@@ -8,7 +8,7 @@ const setDouble = (num) => {
 };
 
 const getDouble = (num) => {
-    return (num / 100).toFixed(2);
+    return num && num.toFixed(2);
 };
 
 const carSchema = new Schema({
