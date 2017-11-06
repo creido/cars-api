@@ -1,0 +1,26 @@
+<h1>Cars</h1>
+
+<% if (list.length) { %>
+    <table>
+        <tr>
+            <th scope="column">Manufacturer</th>
+            <th scope="column">Model</th>
+            <th scope="column">Top Speed</th>
+            <th scope="column">Acceleration</th>
+            <th scope="column">Price</th>
+            <th scope="column">Sold</th>
+            <th scope="column">Date added</th>
+        </tr>
+        <% list.forEach(item => { %>
+            <tr>
+                <td><%= item.manufacturer %></td>
+                <td><%= item.model %></td>
+                <td><%= item.topSpeed %></td>
+                <td><%= item.acceleration %></td>
+                <td><%= item.price %></td>
+                <td><%= item.isSold ? 'Yes' : 'No' %></td>
+                <td><%= item.createdAt %></td>
+            </tr>
+        <% }); %>
+    </table>
+<% } %>

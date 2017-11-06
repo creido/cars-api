@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 const Car = mongoose.model('Cars');
 
 const responseHandler = (response, error, car) => {
+    console.log('responseHandler', response);
     if (error) {
         response.send(error);
-    } else {
-        response.json(car);
     }
+
+    response.json(car);
 };
 
 // TODO: Could modify/add methods for creating, updating or deleting multiple items
@@ -17,17 +18,23 @@ const responseHandler = (response, error, car) => {
 exports.createItem = (req, res) => {
     const car = new Car(req.body);
 
-    console.log('request', req.body);
-
     car.save((error, car) => {
         responseHandler(res, error, car);
     });
 };
 
 // Read or GET
-exports.readAllItems = (req, res) => {
-    Car.find({}, (error, car) => {
-        responseHandler(res, error, car);
+exports.readAllItems = (req, res, next) => {
+
+    Car.find().exec((err, list_cars) => {
+        if (err) {
+            return next(err);
+        }
+
+        // Successful, so render
+        res.render('cars', {
+            list: list_cars
+        });
     });
 };
  
@@ -39,7 +46,6 @@ exports.readItem = (req, res) => {
 
 // Update or PUT
 exports.updateItem = (req, res) => {
-    console.log('PUT', req.body);
     Car.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, (error, car) => {
         responseHandler(res, error, car);
     });

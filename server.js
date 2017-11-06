@@ -6,9 +6,6 @@ const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-app.set('view engine', 'ejs');
-app.set('views', 'api/views');
-
 // load model
 const Car = require('./api/models/carsModel');
   
@@ -18,6 +15,9 @@ mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.set('view engine', 'ejs');
+app.set('views', './api/views');
 
 // import routes
 const routes = require('./api/routes/carsRoutes');
