@@ -6,6 +6,9 @@ const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+app.set('view engine', 'ejs');
+app.set('views', 'api/views');
+
 // load model
 const Car = require('./api/models/carsModel');
   
