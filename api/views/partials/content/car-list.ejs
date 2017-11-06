@@ -8,8 +8,8 @@
             <th scope="column">Top Speed</th>
             <th scope="column">Acceleration</th>
             <th scope="column">Price</th>
-            <th scope="column">Sold</th>
             <th scope="column">Date added</th>
+            <th scope="column">Sold?</th>
         </tr>
         <% list.forEach(item => { %>
             <tr>
@@ -18,8 +18,15 @@
                 <td><%= item.topSpeed %></td>
                 <td><%= item.acceleration %></td>
                 <td><%= item.price %></td>
-                <td><%= item.isSold ? 'Yes' : 'No' %></td>
+                <!-- TODO: format date -->
                 <td><%= item.createdAt %></td>
+                <td>
+                    <% if (item.isSold) { %>
+                        <button type="button" data-item-id="<%= item._id %>" class="btn-sold" disabled>Sold</button>
+                    <% } else { %>
+                        <button type="button" data-item-id="<%= item._id %>" class="btn-sold">Mark as sold</button>
+                    <% } %>
+                </td>
             </tr>
         <% }); %>
     </table>

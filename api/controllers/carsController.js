@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const Car = mongoose.model('Cars');
 
 const responseHandler = (response, error, car) => {
-    console.log('responseHandler', response);
     if (error) {
         response.send(error);
     }

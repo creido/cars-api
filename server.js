@@ -13,6 +13,8 @@ const Car = require('./api/models/carsModel');
 mongoose.connect('mongodb://localhost/carsdb', { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
