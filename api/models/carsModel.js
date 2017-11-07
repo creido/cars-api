@@ -11,6 +11,11 @@ const getDouble = (num) => {
     return num && num.toFixed(2);
 };
 
+// TODO: Add validation for 2 decimal places
+const checkDouble = (num) => {
+    return /^\d+\.(\d{2})$/.test(num.toString());
+};
+
 const carSchema = new Schema({
     manufacturer: {
         type     : String,
